@@ -1,10 +1,10 @@
 const express = require('express');
-const res = require('express/lib/response');
+// const res = require('express/lib/response');
 const logdb = require('./database');
 const morgan = require('morgan');
 const errorhandler = require('errorhandler');
 const fs = require('fs');
-const { process_params } = require('express/lib/router');
+// const { process_params } = require('express/lib/router');
 const app = express();
 
 
@@ -61,7 +61,7 @@ app.use(express.urlencoded({extended: true}))
 
 if(args.debug) {
     app.get('/app/log/access', (req, res) => {
-        const stmt = db.prepare('SELECT * FROM accesslog').all()
+        const stmt = logdb.prepare('SELECT * FROM accesslog').all()
         res.status(200).json(stmt)
     });
 
@@ -92,6 +92,9 @@ if(port_from_sec_arg > 0 && port_from_sec_arg < 65536) {
     port = sec_arg_num;
 } else {
     port = 5000;
+}
+if(args.port) {
+    port = args.port;
 }
 // console.log(sec_arg + " is the second argument")
 // console.log(port + " is the port")
