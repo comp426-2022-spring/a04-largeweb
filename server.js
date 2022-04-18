@@ -51,7 +51,7 @@ app.use((req, res, next) => {
         referer: req.headers['referer'],
         useragent: req.headers['user-agent']
     }
-    console.log(logdata);
+    // console.log(logdata);
     next();})
 
 
