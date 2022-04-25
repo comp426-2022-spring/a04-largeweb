@@ -52,6 +52,8 @@ app.use((req, res, next) => {
         useragent: req.headers['user-agent']
     }
     // console.log(logdata);
+    const stmt = logdb.prepare('INSERT INTO accesslog (remoteaddr, remoteuser, time, method, url, protocol, httpversion, status, referer, useragent) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)')
+    const info = stmt.run(logdata.remoteaddr, logdata.remoteuser, logdata.time, logdata.method, logdata.url, logdata.protocol, logdata.httpversion, logdata.status, logdata.referer, logdata.useragent)
     next();})
 
 
@@ -120,6 +122,16 @@ if(args.port) {
 // WHAT ARE WE SUPPOSED TO VVV PUT HERE?
 // app.use(logging('common', ))
 
+// app.get("/app/adddata", (req, res) => {
+//     try {
+//         const stmt = logdb.prepare('SELECT * FROM userinfo WHERE id = ?').get(req.params.id);
+//         res.status(200).json(stmt);
+//     } catch (e) {
+//         // res.send(e);
+//         console.error(e);
+//     }
+// });
+
 app.get("/app/user/:id", (req, res) => {
     try {
         const stmt = logdb.prepare('SELECT * FROM userinfo WHERE id = ?').get(req.params.id);
@@ -171,7 +183,7 @@ app.get('/app', (req, res) => {
     res.type("text/plain");
 })
 
-app.get('/app/echo/:number', logging, (req, res) => {
+app.get('/app/echo/:number', (req, res) => {
     res.status(200).json({'message': req.params.number});
 })
 
@@ -211,7 +223,7 @@ const server = app.listen(port, () => {
     console.log(`App is running on port ${port}`);
 })
 
-app.use((req, res) => {
-    res.status(404).send("Endpoint does not exist 😞");
-    // res.type("text/plain");
-})
+// app.use((req, res) => {
+//     res.status(404).send("Endpoint does not exist 😞");
+//     // res.type("text/plain");
+// })
