@@ -1,0 +1,30 @@
+{
+  "name": "a03-largeweb",
+  "version": "1.0.0",
+  "description": "Making an API for our functions",
+  "main": "index.js",
+  "scripts": {
+    "test": "node server.js --port=5555"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/comp426-2022-spring/a03-largeweb.git"
+  },
+  "keywords": [
+    "making",
+    "api"
+  ],
+  "author": "Matthew Gordon",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/comp426-2022-spring/a03-largeweb/issues"
+  },
+  "homepage": "https://github.com/comp426-2022-spring/a03-largeweb#readme",
+  "dependencies": {
+    "better-sqlite3": "^7.5.0",
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.2",
+    "morgan": "^1.10.0",
+    "yargs": "^17.3.1"
+  }
+}
